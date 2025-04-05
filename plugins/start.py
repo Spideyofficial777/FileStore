@@ -1,11 +1,11 @@
-# Don't Remove Credit @CodeFlix_Bots, @rohit_1888
-# Ask Doubt on telegram @CodeflixSupport
+# Don't Remove Credit @spideyofficial777, @SPIDEYOFFICIAL777
+# Ask Doubt on telegram @SPIDEYOFFICIAL777
 #
-# Copyright (C) 2025 by Codeflix-Bots@Github, < https://github.com/Codeflix-Bots >.
+# Copyright (C) 2025 by spideyofficial777@Github, < https://github.com/spideyofficial777 >.
 #
-# This file is part of < https://github.com/Codeflix-Bots/FileStore > project,
+# This file is part of < https://github.com/spideyofficial777/FileStore > project,
 # and is released under the MIT License.
-# Please see < https://github.com/Codeflix-Bots/FileStore/blob/master/LICENSE >
+# Please see < https://github.com/spideyofficial777/FileStore/blob/master/LICENSE >
 #
 # All rights reserved.
 #
@@ -203,8 +203,8 @@ async def start_command(client: Client, message: Message):
 
 
 #=====================================================================================##
-# Don't Remove Credit @CodeFlix_Bots, @rohit_1888
-# Ask Doubt on telegram @CodeflixSupport
+# Don't Remove Credit @spideyofficial777, @SPIDEYOFFICIAL777
+# Ask Doubt on telegram @SPIDEYOFFICIAL777
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
@@ -246,28 +246,33 @@ async def not_joined(client: Client, message: Message):
         ])
 
     # Append "Try Again" button if the command has a second argument
-    try:
-        buttons.append([
-            InlineKeyboardButton(
-                text="ʀᴇʟᴏᴀᴅ",
-                url=f"https://t.me/{client.username}?start={message.command[1]}"
-            )
-        ])
-    except IndexError:
-        pass  # Ignore if no second argument is present
 
-    await message.reply_photo(
-        photo=FORCE_PIC,
-        caption=FORCE_MSG.format(
+buttons = []
+
+if len(message.command) > 1:
+    reload_url = f"https://t.me/{client.username}?start={message.command[1]}"
+else:
+    reload_url = f"https://t.me/{client.username}?start=start"  # Default URL
+
+buttons.append([
+    InlineKeyboardButton(
+        text="ʀᴇʟᴏᴀᴅ",
+        url=reload_url
+    )
+])
+
+await message.reply_photo(
+    photo=FORCE_PIC,
+    caption=FORCE_MSG.format(
         first=message.from_user.first_name,
         last=message.from_user.last_name,
         username=None if not message.from_user.username else '@' + message.from_user.username,
         mention=message.from_user.mention,
         id=message.from_user.id
     ),
-    reply_markup=InlineKeyboardMarkup(buttons)#,
-    #message_effect_id=5104841245755180586  # Add the effect ID here
+    reply_markup=InlineKeyboardMarkup(buttons)
 )
+
 
 
 #=====================================================================================##
