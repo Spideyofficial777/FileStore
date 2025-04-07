@@ -228,50 +228,47 @@ async def not_joined(client: Client, message: Message):
             InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ•", url=client.invitelink2)
         ])
 
-    # Check if the third and fourth channels are set
+    # Check if the third and fourth channels are both set
     if FORCE_SUB_CHANNEL3 and FORCE_SUB_CHANNEL4:
         buttons.append([
             InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink3),
             InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ •", url=client.invitelink4),
         ])
-    # Check if only the first channel is set
+    # Check if only the third channel is set
     elif FORCE_SUB_CHANNEL3:
         buttons.append([
             InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ•", url=client.invitelink3)
         ])
-    # Check if only the second channel is set
+    # Check if only the fourth channel is set
     elif FORCE_SUB_CHANNEL4:
         buttons.append([
             InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ•", url=client.invitelink4)
         ])
 
-    # Append "Try Again" button if the command has a second argument
+    # Append "Reload" button at the end
+    if len(message.command) > 1:
+        reload_url = f"https://t.me/{client.username}?start={message.command[1]}"
+    else:
+        reload_url = f"https://t.me/{client.username}?start=start"
 
-buttons = []
+    buttons.append([
+        InlineKeyboardButton(
+            text="ʀᴇʟᴏᴀᴅ",
+            url=reload_url
+        )
+    ])
 
-if len(message.command) > 1:
-    reload_url = f"https://t.me/{client.username}?start={message.command[1]}"
-else:
-    reload_url = f"https://t.me/{client.username}?start=start"  # Default URL
-
-buttons.append([
-    InlineKeyboardButton(
-        text="ʀᴇʟᴏᴀᴅ",
-        url=reload_url
+    await message.reply_photo(
+        photo=FORCE_PIC,
+        caption=FORCE_MSG.format(
+            first=message.from_user.first_name,
+            last=message.from_user.last_name,
+            username=None if not message.from_user.username else '@' + message.from_user.username,
+            mention=message.from_user.mention,
+            id=message.from_user.id
+        ),
+        reply_markup=InlineKeyboardMarkup(buttons)
     )
-])
-
-await message.reply_photo(
-    photo=FORCE_PIC,
-    caption=FORCE_MSG.format(
-        first=message.from_user.first_name,
-        last=message.from_user.last_name,
-        username=None if not message.from_user.username else '@' + message.from_user.username,
-        mention=message.from_user.mention,
-        id=message.from_user.id
-    ),
-    reply_markup=InlineKeyboardMarkup(buttons)
-)
 
 
 
