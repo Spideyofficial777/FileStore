@@ -135,7 +135,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(buttons)
         )
 
-@Bot.on_callback_query()
+"""@Bot.on_callback_query()
 async def cb_handler(Bot: bot, query: CallbackQuery):
     if query.data == "close_data":
         try:
@@ -430,3 +430,4 @@ async def cb_handler(Bot: bot, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+        """
